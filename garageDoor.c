@@ -33,51 +33,6 @@ void checkId() {
   }
 }
 
-void write1() {
-    PORTD |= (1 << PIND6);
-    PORTD |= (1 << PIND7);
-
-    _delay_ms(2);
-    PORTD &= ~(1 << PIND6);
-    PORTD &= ~(1 << PIND7);
-    _delay_ms(1);
-}
-
-void write0() {
-    
-    PORTD |= (1 << PIND6);
-    PORTD |= (1 << PIND7);
-
-    _delay_ms(1);
-    PORTD &= ~(1 << PIND6);
-    PORTD &= ~(1 << PIND7);
-    _delay_ms(1);
-}
-
-void writeNumber(uint8_t number) {
-    
-    for(int i=0; i < number; i++) {
-        write0();
-    }
-
-    _delay_ms(100);
-}
-
-void writeResult() {
-    uint64_t buffer = bits;
-
-    //writeNumber(bitCount);
-
-    for(int i=0; i<bitCount; i++) {
-        if(1 & buffer) {
-          write1();
-        } else {
-          write0();
-        }
-        buffer >>= 1;
-    }
-}
-
 void addBitToCardId(uint8_t bit) {
   bits <<= 1;
   bits |= bit;
